@@ -71,22 +71,64 @@ else{
 }
 ?>
 <!DOCTYPE html>
-<html style="background: url(img/customerbg.PNG) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
-<!-- 
 <head>
-    <title>Customer's Dashboard</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head> -->
+<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 130%;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+
+}
+#logo{
+	margin-left: 450%;
+	font-size: 200%;
+	margin-top:-20px;
+	margin-bottom: -20px;
+}
+#X{
+	font-size: 160%;
+	color: red;
+	font-weight: bold;
+}
+</style>
+</head>
+
+
+<html style="background: url(img/customerbg.PNG) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+
 <title>Seller's Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
+<ul>
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="logo" id="logo">Mede<span id = "X">X</span></a>
+</ul>
+
 <center>
 <div class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin" style="margin:0 auto; width: 45%;">
     <div class="w4-row w3-section" style="margin:0 auto; width: 80%; text-align: left">
