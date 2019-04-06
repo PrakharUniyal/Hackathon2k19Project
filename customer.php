@@ -1,0 +1,109 @@
+<?php
+session_start();
+$errormessage= "";
+if($_POST){
+    if(array_key_exists('signup',$_POST)){
+
+
+    if($_POST['emailto'] == ''){
+        $errormessage.= "Email field cannot be empty"."<br>";
+    }
+    if($_POST['password1'] == ''){
+        $errormessage.= "Password cannot be empty"."<br>";
+    }
+        if (!filter_var($_POST['emailto'], FILTER_VALIDATE_EMAIL)) {
+    $errormessage.= "Enter Valid Email address"."<br>";
+}
+    if($errormessage!=""){
+        $errormessage = "<div class='alert alert-danger' role='alert'>"."These were error(s) in your form:"."<br>".$errormessage."</div>";
+    }
+    else{
+        $link = mysqli_connect('localhost','root','','user');
+            if(mysqli_connect_error()){
+                die("Connection Unsuccessful!");
+            }
+        $password = md5($_POST['password1']);
+        $query = "INSERT INTO `users` (`Email`, `Password`) VALUES ('".mysqli_real_escape_string($link, $_POST['emailto'])."', '".mysqli_real_escape_string($link,$password)."')";
+        if(mysqli_query($link,$query)){
+            if(array_key_exists('cookie1',$_POST)){
+                setcookie("customerID","1234",time()+60*60*1);
+            }
+            $_SESSION['email'] = $_POST['emailto'];
+            header("Location: mainpage.php");
+        }
+  
+    }
+}
+    else if(array_key_exists('login',$_POST)){
+        if($_POST['emailto'] == ''){
+        $errormessage.= "Email field cannot be empty"."<br>";
+    }
+    if($_POST['password1'] == ''){
+        $errormessage.= "Password cannot be empty"."<br>";
+    }
+        if (!filter_var($_POST['emailto'], FILTER_VALIDATE_EMAIL)) {
+    $errormessage.= "Enter Valid Email address"."<br>";
+}
+    if($errormessage!=""){
+        $errormessage = "These were error(s) in your form:"."<br>".$errormessage;
+    }
+else{
+        $link = mysqli_connect('localhost','root','','user');
+            if(mysqli_connect_error()){
+                die("Connection Unsuccessful!");
+            }
+    $password = md5($_POST['password1']);
+    $query = "SELECT `Id` FROM `users` WHERE Email = '".mysqli_real_escape_string($link,$_POST['emailto'])."' AND Password = '".mysqli_real_escape_string($link,$password)."'";
+    $result = mysqli_query($link,$query);
+    if(mysqli_num_rows($result)>0){
+        if(array_key_exists('cookie1',$_POST)){
+                setcookie("customerID","1234",time()+60*60*1);
+            }
+        $_SESSION['email'] = $_POST['emailto'];
+        header("Location: mainpage.php");
+    }
+    else{
+        
+            $errormessage.="<div class='alert alert-danger' role='alert'>"."Incorrect Email ID or Password"."</div>";
+    }
+    }
+}
+}
+?>
+<!DOCTYPE html>
+<html style="background: url(img/customerbg.PNG) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+<!-- 
+<head>
+    <title>Customer's Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head> -->
+<title>Seller's Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+<center>
+<div class="w3-container w3-card-4 w3-light-grey w3-text-black w3-margin" style="margin:0 auto; width: 45%;">
+    <div class="w4-row w3-section" style="margin:0 auto; width: 80%; text-align: left">
+        <h2 style="display: inline-block;">Hello "Customer"!</h2>
+        <button class="w3-button w3-right w3-section w3-green w3-ripple"> Logout </button>
+    </div>
+    <br>
+    <div class="w4-row w3-section">
+        <h2 class="w3-row">What are you looking for?</h2>
+        <div class="w3-rest" style="width:500px">
+            <input class="w3-input w3-border" name="query" type="text" placeholder="Name of a Drug">
+            <button class="w3-button w3-section w3-blue w3-ripple"> Go </button>
+        </div>
+    </div>
+</div>
+
+
+</center>
+</body>
+</html> 
